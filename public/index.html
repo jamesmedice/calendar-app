@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shibumi Med — Agenda</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/it.global.min.js" defer></script>
+  <script src="/calendar.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Apri il menu di navigazione" aria-controls="side-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="brand" href="/" aria-label="Shibumi Med, agenda">
+      <img src="/img/logo.png" alt="Logo Shibumi Med">
+      <div><span>SHIBUMI MED</span><small>STUDIO APPUNTAMENTI</small></div>
+    </a>
+    <div id="account" class="account"></div>
+  </header>
+  <div class="menu-scrim" id="menu-scrim" hidden></div>
+  <nav class="side-menu" id="side-menu" aria-label="Navigazione principale" aria-hidden="true">
+    <p class="menu-label">AREA PERSONALE</p>
+    <button class="menu-item active" type="button" data-view="welcome">
+      <span class="menu-icon home-icon" aria-hidden="true">⌂</span> Benvenuto
+    </button>
+    <button class="menu-item" type="button" data-view="calendar">
+      <span class="menu-icon calendar-icon" aria-hidden="true">▦</span> Calendario
+    </button>
+    <button class="menu-item" type="button" data-view="payments">
+      <span class="menu-icon payments-icon" aria-hidden="true">€</span> Pagamenti
+    </button>
+    <button class="menu-item" type="button" data-view="clients">
+      <span class="menu-icon clients-icon" aria-hidden="true">◎</span> Clienti
+    </button>
+    <button class="menu-item" type="button" data-view="reports">
+      <span class="menu-icon reports-icon" aria-hidden="true">▤</span> Report
+    </button>
+    <div class="menu-footer"><span class="menu-status-dot"></span> Il tuo spazio personale</div>
+  </nav>
+
+  <main class="layout">
+    <section class="page-view welcome-view" id="welcome-view">
+      <div class="welcome-backdrop" aria-hidden="true">
+        <span class="color-wash wash-blue"></span><span class="color-wash wash-red"></span>
+        <span class="color-wash wash-yellow"></span><span class="color-wash wash-green"></span>
+      </div>
+      <div class="welcome-card">
+        <div class="welcome-brand">
+          <img src="/img/logo.png" alt="Logo Shibumi Med">
+          <p>SHIBUMI MED <span>·</span> STUDIO APPUNTAMENTI</p>
+        </div>
+        <p class="eyebrow"><span></span> IL TUO SPAZIO, CON CURA</p>
+        <h1>Il tuo tempo,<br><em>in perfetto equilibrio.</em></h1>
+        <p class="welcome-description">Organizza appuntamenti e pagamenti in un unico spazio, e dedica più tempo a ciò che conta.</p>
+        <button class="button welcome-action" id="open-calendar" type="button">
+          Apri il calendario <span aria-hidden="true">→</span>
+        </button>
+        <a class="welcome-connect" id="welcome-connect" href="/auth/google" hidden>Collega Google Calendar</a>
+        <div class="welcome-footnote"><span class="google-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Un po' più di armonia, ogni giorno</div>
+      </div>
+      <div class="welcome-aside">
+        <span class="aside-mark" aria-hidden="true">✳</span>
+        <p>FAI SPAZIO<br>A CIÒ CHE<br><em>CONTA.</em></p>
+      </div>
+    </section>
+    <section class="page-view calendar-view" id="calendar-view" hidden>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> AREA PERSONALE</p>
+          <h1>Calendario</h1>
+          <p>Organizza gli appuntamenti e tieni sotto controllo la tua settimana.</p>
+        </div>
+        <div class="intro-actions">
+          <div id="connection" class="connection"></div>
+          <button id="calendar-setup" class="secondary" type="button" hidden>Crea calendario Google</button>
+        </div>
+      </section>
+      <section id="calendar-panel" class="panel calendar-panel" hidden><div id="calendar"></div></section>
+      <section id="signed-out" class="signed-out" hidden>
+        <div class="signed-out-art">
+          <span class="orb orb-one"></span><span class="orb orb-two"></span>
+          <img src="/img/logo.png" alt="Logo Shibumi Med">
+        </div>
+        <div class="signed-out-content">
+          <p class="eyebrow">BENVENUTO</p>
+          <h2>Collega il tuo calendario</h2>
+          <p>Riunisci tutti i tuoi appuntamenti in uno spazio elegante e gestiscili con semplicità.</p>
+          <a class="button google-button" href="/auth/google"><span class="google-g">G</span>Continua con Google</a>
+          <small>Autorizzazione Google protetta · Nessuna password viene salvata</small>
+        </div>
+      </section>
+    </section>
+    <section class="page-view payments-view" id="payments-view" hidden>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> GESTIONE CLIENTI</p>
+          <h1>Pagamenti</h1>
+          <p>Tieni insieme i pagamenti e gli appuntamenti dei tuoi clienti.</p>
+        </div>
+        <div class="payment-summary"><span class="summary-dot"></span> Registro pagamenti</div>
+      </section>
+      <div class="payments-layout">
+        <section class="panel payment-form-panel">
+          <div class="section-heading">
+            <div><p class="eyebrow">NUOVO INSERIMENTO</p><h2>Aggiungi un pagamento</h2></div>
+            <span class="form-step">01</span>
+          </div>
+          <p class="form-intro">Registra un pagamento e collegalo a un appuntamento, se presente.</p>
+          <form id="payment-form" class="payment-form">
+            <label>Email cliente
+              <input id="payment-client-email" type="email" required maxlength="254" placeholder="nome@esempio.it">
+            </label>
+            <label>Importo
+              <input id="payment-amount" type="number" min="0.01" max="1000000" step="0.01" required placeholder="0,00">
+            </label>
+            <label>Collega un appuntamento <span class="optional-label">FACOLTATIVO</span>
+              <select id="payment-booking">
+                <option value="">Nessun appuntamento — inserisci data e ora</option>
+              </select>
+              <small class="field-help">Selezionando un appuntamento, data e ora vengono compilate automaticamente.</small>
+            </label>
+            <label>Data e ora dell'appuntamento
+              <input id="payment-exam-date" type="datetime-local" required>
+            </label>
+            <label>Stato del pagamento
+              <select id="payment-status" required>
+                <option value="In Attesa">In Attesa</option>
+                <option value="Pagato">Pagato</option>
+                <option value="Annullato">Annullato</option>
+              </select>
+            </label>
+            <p id="payment-form-error" class="error" role="alert"></p>
+            <button type="submit" class="button save-payment">Salva pagamento <span aria-hidden="true">→</span></button>
+            <p class="payment-note">Viene registrato il pagamento, ma non viene effettuato alcun addebito.</p>
+          </form>
+        </section>
+        <section class="panel payment-records-panel">
+          <div class="section-heading">
+            <div><p class="eyebrow">RIEPILOGO</p><h2>Pagamenti recenti</h2></div>
+            <span id="payment-count" class="record-count">0</span>
+          </div>
+          <div class="payment-table-wrap">
+            <table class="payment-table">
+              <thead><tr><th>CLIENTE</th><th>APPUNTAMENTO</th><th>IMPORTO</th><th>STATO</th></tr></thead>
+              <tbody id="payment-list"></tbody>
+            </table>
+            <p id="payment-empty" class="payment-empty">Nessun pagamento. Aggiungi un nuovo inserimento per visualizzarlo qui.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="page-view clients-view" id="clients-view" hidden>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> RELAZIONI CON I CLIENTI</p>
+          <h1>Schede clienti</h1>
+          <p>Un unico spazio per dati, appuntamenti e pagamenti dei clienti.</p>
+        </div>
+        <div class="payment-summary"><span class="summary-dot"></span> Spazio riservato</div>
+      </section>
+      <div class="clients-layout">
+        <aside class="panel client-directory">
+          <div class="client-directory-heading">
+            <div><p class="eyebrow">I TUOI CONTATTI</p><h2>Clienti <span id="client-count">0</span></h2></div>
+            <button type="button" class="button add-client" id="add-client">+ Aggiungi</button>
+          </div>
+          <label class="client-search-label">
+            <span class="visually-hidden">Cerca clienti</span>
+            <input id="client-search" type="search" placeholder="Cerca per nome o email">
+          </label>
+          <div id="client-list" class="client-list"></div>
+          <p id="client-list-empty" class="client-list-empty">I clienti dei pagamenti appariranno qui.</p>
+        </aside>
+        <section class="panel client-profile-panel">
+          <div id="client-profile-placeholder" class="client-profile-placeholder">
+            <span class="profile-placeholder-mark" aria-hidden="true">◎</span>
+            <h2>Seleziona un cliente</h2>
+            <p>Scegli un cliente per visualizzare la sua scheda, gli appuntamenti e i pagamenti.</p>
+          </div>
+          <div id="client-profile-detail"></div>
+        </section>
+      </div>
+    </section>
+    <section class="page-view reports-view" id="reports-view" hidden>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> ANALISI E RIEPILOGHI</p>
+          <h1>Report</h1>
+          <p>Consulta i pagamenti e gli appuntamenti nel periodo selezionato.</p>
+        </div>
+        <div class="payment-summary"><span class="summary-dot"></span> Dati aggiornati</div>
+      </section>
+      <section class="panel report-filters" aria-label="Filtri del report">
+        <label>Dal giorno<input id="report-from" type="date"></label>
+        <label>Al giorno<input id="report-to" type="date"></label>
+        <label>Cliente<select id="report-client"><option value="">Tutti i clienti</option></select></label>
+        <label>Stato<select id="report-status">
+          <option value="">Tutti gli stati</option>
+          <option value="In Attesa">In Attesa</option>
+          <option value="Pagato">Pagato</option>
+          <option value="Annullato">Annullato</option>
+        </select></label>
+        <button id="report-reset" class="secondary report-reset" type="button">Azzera filtri</button>
+      </section>
+      <section class="report-metrics" aria-label="Riepilogo pagamenti">
+        <article class="panel report-metric"><span class="metric-icon">▤</span><p>Pagamenti nel report</p><strong id="report-count">0</strong></article>
+        <article class="panel report-metric"><span class="metric-icon metric-blue">€</span><p>Importo totale</p><strong id="report-total">0,00</strong></article>
+        <article class="panel report-metric"><span class="metric-icon metric-green">✓</span><p>Incassato</p><strong id="report-paid">0,00</strong></article>
+        <article class="panel report-metric"><span class="metric-icon metric-gold">◷</span><p>Pagamenti in attesa</p><strong id="report-pending">0</strong></article>
+      </section>
+      <section class="panel report-results">
+        <div class="section-heading">
+          <div><p class="eyebrow">DETTAGLIO</p><h2>Pagamenti e appuntamenti</h2></div>
+        </div>
+        <div class="payment-table-wrap">
+          <table class="payment-table report-table">
+            <thead><tr><th>DATA APPUNTAMENTO</th><th>CLIENTE</th><th>APPUNTAMENTO</th><th>IMPORTO</th><th>STATO</th></tr></thead>
+            <tbody id="report-list"></tbody>
+          </table>
+          <p id="report-empty" class="payment-empty">Nessun pagamento corrisponde ai filtri selezionati.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+  <dialog id="event-dialog"><form id="event-form" method="dialog"><div class="dialog-head"><h2 id="dialog-title">Nuovo appuntamento</h2><button type="button" class="icon-button" id="close-dialog" aria-label="Chiudi">×</button></div>
+    <input type="hidden" id="event-id"><label>Titolo<input id="title" required maxlength="200" placeholder="Che cosa devi fare?"></label>
+    <label>Email cliente (riceverà l’invito)<input id="client-email" type="email" required maxlength="254" placeholder="nome@esempio.it"></label>
+    <div class="two-col"><label>Inizio<input id="start" type="datetime-local" required></label><label>Fine<input id="end" type="datetime-local" required></label></div>
+    <label>Luogo<input id="location" maxlength="500" placeholder="Facoltativo"></label><label>Descrizione<textarea id="description" rows="3" placeholder="Dettagli facoltativi"></textarea></label>
+    <p id="form-error" class="error" role="alert"></p><div class="dialog-actions"><button type="button" id="delete-event" class="danger" hidden>Elimina</button><span class="grow"></span><button type="button" class="secondary" id="cancel-dialog">Annulla</button><button type="submit" class="button">Salva appuntamento</button></div>
+  </form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body></html>

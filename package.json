@@ -1,0 +1,25 @@
+{
+  "name": "personal-google-calendar-datastore-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node.js/Express web calendar using Google OAuth, Google Calendar API and Google Cloud Datastore.",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node --check src/middleware/requireIap.js && node --check src/routes/auth.js && node --check src/routes/events.js && node --check src/routes/payments.js && node --check src/routes/clients.js && node --check src/services/googleCalendar.js && node --check src/services/localGoogleAuth.js && node --check src/services/datastore.js && node --check src/services/localStorage.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "^10.1.0",
+    "connect-session-sequelize": "^7.1.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "google-auth-library": "^10.9.1",
+    "googleapis": "^144.0.0",
+    "helmet": "^8.0.0"
+  }
+}
